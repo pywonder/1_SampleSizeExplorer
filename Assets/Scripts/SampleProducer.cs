@@ -5,31 +5,31 @@ using UnityEngine;
 public class SampleProducer : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _tileOptions;
-    
+
+    [SerializeField] private GameObject _metal;
+    [SerializeField] private List<Material> _metalFinishOptions;
+
+
     public void TileOptionChange(int index)
     {
         foreach (var opt in _tileOptions)
         {
             opt.SetActive(false);
         }
+
         _tileOptions[index].SetActive(true);
     }
 
-    public void CloseMenu()
+    public void MetalMaterialChange(int index)
     {
-        gameObject.SetActive(false);
-    }
-    
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+        if (index >= 0 && index < _metalFinishOptions.Count)
+        {
+            Renderer metalRenderer = _metal.GetComponent<Renderer>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            if (metalRenderer != null)
+            {
+                metalRenderer.material = _metalFinishOptions[index];
+            }
+        }
     }
 }
