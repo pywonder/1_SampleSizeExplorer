@@ -14,11 +14,19 @@ public class ProgramManager : MonoBehaviour
    [SerializeField] private GameObject desk1;
    [SerializeField] private GameObject desk2;
 
+   [SerializeField] private GameObject topView;
+   
+   [SerializeField] private Material[] walltileMaterialOptions;
+   [SerializeField] private GameObject walltileSample;
+   [SerializeField] private GameObject wallTileOptionsWindow;
+   
    private MeshFilter tileMeshFilter;
    private List<MeshCollider> tileMeshColliders;
    
    private int desk1MaterialIndex = 0;
    private int desk2MaterialIndex = 0;
+   private bool accentTileWindowOpen = false;
+   private bool TileWindowOpen = false;
    
    public void Start()
    {
@@ -26,6 +34,8 @@ public class ProgramManager : MonoBehaviour
        tileMeshFilter = tileSample.GetComponent<MeshFilter>();
        tileMeshColliders = new List<MeshCollider>(tileSample.GetComponents<MeshCollider>());
        
+       wallTileOptionsWindow.SetActive(false);
+       topView.SetActive(false);
    }
 
    public void TileSizeChange(int index)
@@ -39,12 +49,16 @@ public class ProgramManager : MonoBehaviour
    
    public void OpenTileWindow()
    {
-       tileOptionsWindow.SetActive(true);
-   }
-
-   public void CloseTileWindow()
-   {
-       tileOptionsWindow.SetActive(false);
+       if (accentTileWindowOpen)
+       {
+           tileOptionsWindow.SetActive(false);
+           accentTileWindowOpen = false;
+       }
+       else
+       {
+           tileOptionsWindow.SetActive(true);
+           accentTileWindowOpen = true;
+       }
    }
    
    public void Desk1MaterialChange()
@@ -59,5 +73,34 @@ public class ProgramManager : MonoBehaviour
        desk1MaterialIndex = (desk1MaterialIndex + 1) % deskMaterialOptions.Length;
    }
    
+   public void WallTileMaterialBlue()
+   {
+       walltileSample.GetComponent<Renderer>().material = walltileMaterialOptions[1];
+   }
+   
+   public void WallTileMaterialGreen()
+   {
+       walltileSample.GetComponent<Renderer>().material = walltileMaterialOptions[0];
+   }
 
+   public void OpenWallTileWindow()
+   {
+       if (TileWindowOpen)
+       {
+           wallTileOptionsWindow.SetActive(false);
+           TileWindowOpen = false;
+       }
+       else
+       {
+           wallTileOptionsWindow.SetActive(true);
+           TileWindowOpen = true;
+       }
+   }
+   
+   public void TopViewOn()
+   {
+       topView.SetActive(true);
+   }
+   
+   
 }
