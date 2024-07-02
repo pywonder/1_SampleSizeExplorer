@@ -9,6 +9,8 @@ public class ProgramManager : MonoBehaviour
    [SerializeField] private Mesh[] tileSizeOptions;
    [SerializeField] private GameObject tileSample;
    [SerializeField] private GameObject tileOptionsWindow;
+   [SerializeField] private Material tileMaterial;
+   [SerializeField] private Vector2 baseTextureScale = new Vector2(1.0f, 1.0f); // Base texture scale
    
    [SerializeField] private Material[] deskMaterialOptions;
    [SerializeField] private GameObject desk1;
@@ -45,6 +47,12 @@ public class ProgramManager : MonoBehaviour
        { 
            meshCollider.sharedMesh = tileSizeOptions[index];
        }
+        if (tileMaterial != null)
+       {
+           Vector2 textureScale = new Vector2(baseTextureScale.x * (index+1), baseTextureScale.y * 1);
+           tileMaterial.mainTextureScale = textureScale;
+       }
+       
    }
    
    public void OpenTileWindow()
