@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class MovementControl : MonoBehaviour
 {
-    [SerializeField] private GameObject accentTile;
+    [SerializeField] private GameObject allBaseModels;
+    [SerializeField] private GameObject centerCameraAnchor;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -15,10 +17,12 @@ public class MovementControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (accentTile != null)
+        if (allBaseModels != null)
         {
             // Set the rotation to (0, 0, 0)
-            accentTile.transform.rotation = Quaternion.Euler(Vector3.zero);
+            allBaseModels.transform.rotation = Quaternion.Euler(Vector3.zero);
         }
+        
+        
     }
 }
