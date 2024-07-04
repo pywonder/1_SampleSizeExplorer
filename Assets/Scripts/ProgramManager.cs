@@ -16,11 +16,18 @@ public class ProgramManager : MonoBehaviour
    [SerializeField] private GameObject desk1;
    [SerializeField] private GameObject desk2;
 
+   [SerializeField] private GameObject floorPattern1;
+   [SerializeField] private GameObject floorPattern2;
+   [SerializeField] private GameObject floorPattern1Object;
+   
    [SerializeField] private GameObject topView;
    
    [SerializeField] private Material[] walltileMaterialOptions;
    [SerializeField] private GameObject walltileSample;
    [SerializeField] private GameObject wallTileOptionsWindow;
+   
+   [SerializeField] private GameObject metalPanels;
+   private bool metalPanelIsOn = false;
    
    private MeshFilter tileMeshFilter;
    private List<MeshCollider> tileMeshColliders;
@@ -32,7 +39,11 @@ public class ProgramManager : MonoBehaviour
    
    public void Start()
    {
-       tileOptionsWindow.SetActive(false);
+       floorPattern1Object.SetActive(false);
+       floorPattern1.SetActive(false);
+       floorPattern2.SetActive(false);
+       metalPanels.SetActive(false);
+       //tileOptionsWindow.SetActive(false);
        tileMeshFilter = tileSample.GetComponent<MeshFilter>();
        tileMeshColliders = new List<MeshCollider>(tileSample.GetComponents<MeshCollider>());
        
@@ -59,12 +70,14 @@ public class ProgramManager : MonoBehaviour
    {
        if (accentTileWindowOpen)
        {
-           tileOptionsWindow.SetActive(false);
+           walltileSample.SetActive(false);
+           //tileOptionsWindow.SetActive(false);
            accentTileWindowOpen = false;
        }
        else
        {
-           tileOptionsWindow.SetActive(true);
+           walltileSample.SetActive(true);
+           //tileOptionsWindow.SetActive(true);
            accentTileWindowOpen = true;
        }
    }
@@ -91,17 +104,17 @@ public class ProgramManager : MonoBehaviour
        walltileSample.GetComponent<Renderer>().material = walltileMaterialOptions[0];
    }
 
-   public void OpenWallTileWindow()
+   public void OpenMetalPanels()
    {
-       if (TileWindowOpen)
+       if (metalPanelIsOn)
        {
-           wallTileOptionsWindow.SetActive(false);
-           TileWindowOpen = false;
+           metalPanels.SetActive(false);
+           metalPanelIsOn = false;
        }
        else
        {
-           wallTileOptionsWindow.SetActive(true);
-           TileWindowOpen = true;
+           metalPanels.SetActive(true);
+           metalPanelIsOn = true;
        }
    }
    
@@ -109,6 +122,22 @@ public class ProgramManager : MonoBehaviour
    {
        topView.SetActive(true);
    }
+
+   public void FloorPattern1()
+   {
+       floorPattern1.SetActive(true);
+       floorPattern2.SetActive(false);
+   }
    
-   
+   public void FloorPattern2()
+   {
+       floorPattern1.SetActive(false);
+       floorPattern2.SetActive(true);
+   }
+
+   public void FloorPattern1Open()
+   {
+       floorPattern1Object.SetActive(true);
+   }
+
 }
