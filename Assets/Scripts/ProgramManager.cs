@@ -18,6 +18,8 @@ public class ProgramManager : MonoBehaviour
 
    [SerializeField] private GameObject floorPattern1;
    [SerializeField] private GameObject floorPattern2;
+   [SerializeField] private GameObject floorPattern1ConfirmButton;
+   [SerializeField] private GameObject floorPattern2ConfirmButton;
    [SerializeField] private GameObject floorPattern1Object;
    
    [SerializeField] private GameObject topView;
@@ -27,7 +29,10 @@ public class ProgramManager : MonoBehaviour
    [SerializeField] private GameObject wallTileOptionsWindow;
    
    [SerializeField] private GameObject metalPanels;
+   [SerializeField] private GameObject metalPanelMockUp;
    private bool metalPanelIsOn = false;
+   
+   [SerializeField] private GameObject FinishText;
    
    private MeshFilter tileMeshFilter;
    private List<MeshCollider> tileMeshColliders;
@@ -39,6 +44,9 @@ public class ProgramManager : MonoBehaviour
    
    public void Start()
    {
+       metalPanelMockUp.SetActive(false);
+       floorPattern1ConfirmButton.SetActive(false);
+       floorPattern2ConfirmButton.SetActive(false);
        floorPattern1Object.SetActive(false);
        floorPattern1.SetActive(false);
        floorPattern2.SetActive(false);
@@ -110,11 +118,15 @@ public class ProgramManager : MonoBehaviour
        {
            metalPanels.SetActive(false);
            metalPanelIsOn = false;
+           walltileSample.SetActive(true);
+           accentTileWindowOpen = true;
        }
        else
        {
            metalPanels.SetActive(true);
            metalPanelIsOn = true;
+           walltileSample.SetActive(false);
+           accentTileWindowOpen = false;
        }
    }
    
@@ -126,12 +138,16 @@ public class ProgramManager : MonoBehaviour
    public void FloorPattern1()
    {
        floorPattern1.SetActive(true);
+       floorPattern1ConfirmButton.SetActive(true);
+       floorPattern2ConfirmButton.SetActive(false);
        floorPattern2.SetActive(false);
    }
    
    public void FloorPattern2()
    {
        floorPattern1.SetActive(false);
+       floorPattern1ConfirmButton.SetActive(false);
+       floorPattern2ConfirmButton.SetActive(true);
        floorPattern2.SetActive(true);
    }
 
@@ -140,4 +156,8 @@ public class ProgramManager : MonoBehaviour
        floorPattern1Object.SetActive(true);
    }
 
+   public void MockUpOn()
+   {
+       metalPanelMockUp.SetActive(true);
+   }
 }
